@@ -15,7 +15,7 @@
   'use strict';
   window.AetherTtsConfig = window.AetherTtsConfig || {
     siliconflowKey: '',
-    fishAudioApiKey: '5df60b32f414447f8b90a73497c53908',
+    fishAudioApiKey: '',
     fishAudioApiBase: 'http://127.0.0.1:8787',
 
     byLocale: {
