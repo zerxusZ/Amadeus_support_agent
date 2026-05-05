@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python skills/ui-ux-pro-max/scripts/search.py \"AI self-management productivity task manager cozy warm scifi pressure dark glassmorphism\" --design-system -p \"AETHER\" -f markdown)",
+      "Bash(dir /s /b \"C:\\\\Users\\\\Zerxus\\\\.claude\\\\skills\\\\ui-ux-pro-max-skill-main\\\\*.py\")",
+      "Bash(python src/ui-ux-pro-max/scripts/search.py \"AI self-management productivity task manager cozy warm scifi pressure dark glassmorphism\" --design-system -p \"AETHER\" -f markdown)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(node -e ':*)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp"
+    ]
+  }
+}

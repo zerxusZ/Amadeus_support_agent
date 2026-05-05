@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="scifi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AETHER — AI 自我管理助手</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%236C8EFF'>Æ</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="preload" as="image" href="img/back.png" fetchpriority="high">
+  <script>try{document.documentElement.dataset.theme='scifi';}catch(e){}</script>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ============================================================
+       SIDEBAR
+       ============================================================ -->
+  <nav id="sidebar">
+    <div class="sidebar-role-avatar-wrap" id="sidebar-role-avatar" aria-hidden="true">
+      <div class="sidebar-role-avatar">
+        <img class="sidebar-role-avatar-img" alt="" decoding="async" width="200" height="200">
+        <span class="sidebar-role-avatar-fallback" style="display:none">·</span>
+      </div>
+    </div>
+    <div class="sidebar-nav">
+      <button class="nav-item active" data-view="dashboard" title="仪表盘">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="3" width="7" height="7" rx="1"/>
+          <rect x="14" y="3" width="7" height="7" rx="1"/>
+          <rect x="3" y="14" width="7" height="7" rx="1"/>
+          <rect x="14" y="14" width="7" height="7" rx="1"/>
+        </svg>
+        <span class="nav-label" data-i18n="nav.dashboard">仪表盘</span>
+      </button>
+
+      <button class="nav-item" data-view="tasks" title="任务管理">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <polyline points="9 11 12 14 22 4"/>
+          <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+        </svg>
+        <span class="nav-label" data-i18n="nav.tasks">任务</span>
+      </button>
+
+      <button class="nav-item" data-view="calendar" title="任务日历">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        <span class="nav-label" data-i18n="nav.calendar">日历</span>
+      </button>
+
+      <button class="nav-item" data-view="daily" title="每日任务">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <polyline points="17 1 21 5 17 9"/>
+          <path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+          <polyline points="7 23 3 19 7 15"/>
+          <path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+        </svg>
+        <span class="nav-label" data-i18n="nav.daily">每日任务</span>
+      </button>
+
+      <button class="nav-item" data-view="branches" title="长期任务 · 枝条">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor">
+          <path d="M6 3v12"/>
+          <path d="M18 9a3 3 0 0 0-3-3H6"/>
+          <path d="M6 21a3 3 0 0 0 3-3V9a3 3 0 0 0-3-3"/>
+          <circle cx="18" cy="9" r="3"/>
+          <circle cx="6" cy="21" r="3"/>
+          <circle cx="6" cy="3" r="3"/>
+        </svg>
+        <span class="nav-label" data-i18n="nav.branches">长期任务</span>
+      </button>
+
+      <button class="nav-item" data-view="knowledge" title="知识库">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+        </svg>
+        <span class="nav-label" data-i18n="nav.knowledge">知识库</span>
+      </button>
+
+      <button class="nav-item" data-view="chat" title="AI 助手">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+        <span class="nav-label" data-i18n="nav.chat">AI 助手</span>
+      </button>
+
+      <button class="nav-item" data-view="rewards" title="积分中心 · 兑换与记录">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+        <span class="nav-label" data-i18n="nav.rewards">积分中心</span>
+      </button>
+
+      <button class="nav-item" data-view="profile" title="个人档案">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        <span class="nav-label" data-i18n="nav.profile">个人档案</span>
+      </button>
+    </div>
+
+    <div class="sidebar-footer">
+      <button class="nav-item" data-view="settings" title="设置">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+        <span class="nav-label" data-i18n="nav.settings">设置</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
+  <main id="main-content">
+
+    <!-- Top Header (rendered by app.js) -->
+    <header id="top-header"></header>
+
+    <!-- Views Container -->
+    <div id="views-container">
+      <section id="view-dashboard" class="view active"></section>
+      <section id="view-tasks"     class="view"></section>
+      <section id="view-calendar" class="view"></section>
+      <section id="view-daily" class="view"></section>
+      <section id="view-branches" class="view"></section>
+      <section id="view-knowledge" class="view"></section>
+      <section id="view-chat"      class="view"></section>
+      <section id="view-rewards"   class="view"></section>
+      <section id="view-profile"   class="view"></section>
+      <section id="view-settings"  class="view settings-view-shell"></section>
+    </div>
+
+  </main>
+</div>
+
+<!-- Modal -->
+<div id="modal-overlay" class="modal-overlay hidden">
+  <div id="modal-container" class="modal-container glass-card"></div>
+</div>
+
+<!-- Toasts -->
+<div id="toast-container"></div>
+
+<!-- App core -->
+<script src="js/storage.js"></script>
+<script src="js/i18n.js"></script>
+<script src="config/tts-config.js"></script>
+<!-- Agent: shared utilities -->
+<script src="agent/aether-log.js"></script>
+<!-- Agent: AMADEUS · L3 核心约束层 -->
+<script src="agent/AMADEUS/modules/L3/anti-hallucination.js"></script>
+<script src="agent/AMADEUS/modules/L3/file-boundary.js"></script>
+<script src="agent/AMADEUS/modules/L3/memory.js"></script>
+<script src="agent/AMADEUS/modules/L3/attention.js"></script>
+<!-- Agent: AMADEUS · L2 行为层 -->
+<script src="agent/AMADEUS/modules/L2/task-decomp.js"></script>
+<script src="agent/AMADEUS/modules/L2/ltask-manager.js"></script>
+<script src="agent/AMADEUS/modules/L2/summarization.js"></script>
+<script src="agent/AMADEUS/modules/L2/kb-sync.js"></script>
+<script src="agent/AMADEUS/modules/L2/skill-controller.js"></script>
+<!-- Agent: AMADEUS · L1 输出层 -->
+<script src="agent/AMADEUS/modules/L1/personality.js"></script>
+<script src="agent/AMADEUS/modules/L1/language.js"></script>
+<script src="agent/AMADEUS/modules/L1/mood.js"></script>
+<script src="agent/AMADEUS/modules/L1/format.js"></script>
+<!-- Agent: AMADEUS · 模块注册表 -->
+<script src="agent/AMADEUS/modules/index.js"></script>
+<!-- Agent: AMADEUS · 核心运行时 -->
+<script src="agent/AMADEUS/config.js"></script>
+<script src="agent/AMADEUS/harness.js"></script>
+<script src="agent/AMADEUS/context.js"></script>
+<script src="agent/AMADEUS/attachments.js"></script>
+<script src="agent/AMADEUS/actions.js"></script>
+<script src="agent/AMADEUS/ai.js"></script>
+<!-- Live2D runtime -->
+<script src="utils/live2d/live2d.min.js"></script>
+<script src="utils/live2d/live2dcubismcore.min.js"></script>
+<script src="utils/live2d/pixi.min.js"></script>
+<script src="utils/live2d/index.min.js"></script>
+<script src="agent/AMADEUS/voice.js"></script>
+<!-- App UI -->
+<script src="js/app.js"></script>
+
+</body>
+</html>
